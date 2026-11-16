@@ -7,7 +7,7 @@ log=$(mktemp)
 trap 'rm -f "$log"' EXIT
 
 echo "== C++ =="
-for src in [0-9][0-9]-*/*.cpp; do
+for src in [0-9][0-9]*-*/*.cpp; do
     name=$(basename "$src" .cpp)
     if g++ -Wall -O2 "$src" -o "/tmp/$name" 2>"$log"; then
         echo "  OK   $src"
@@ -20,7 +20,7 @@ for src in [0-9][0-9]-*/*.cpp; do
 done
 
 echo "== Python =="
-for src in [0-9][0-9]-*/*.py; do
+for src in [0-9][0-9]*-*/*.py; do
     if python3 -m py_compile "$src" 2>"$log"; then
         echo "  OK   $src"
         ok=$((ok + 1))
