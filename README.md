@@ -5,18 +5,18 @@ directly by experiment folder at the repository root. Every program comes with:
 
 - **Program** — the C++ or Python source file
 - **Theory** — written lab info to submit with the program (aim, topic overview, how it works, algorithm, complexity)
-- **Explanation** — student-facing guide explaining the code, dry runs, common mistakes, and viva Q&A
+- **Explanation** — complete, fact-focused reference covering what the code does, definitions, full forms, uses/applications, step-by-step algorithm, line-by-line code guide, dry runs, time & space complexity, common mistakes, and straightforward viva Q&A
 
 ## All Programs
 
 | # | Program / Experiment | Language | Program | Theory | Explanation | Section |
 |---|---|---|---|---|---|---|
-| 00a | Linear Search | C++ | [`linear_search.cpp`](00-searching-and-sorting/linear_search.cpp) | [theory](00-searching-and-sorting/linear_search_THEORY.md) | [explanation](00-searching-and-sorting/linear_search_EXPLANATION.md) | [jump](#linear-search) |
-| 00b | Binary Search | C++ | [`binary_search.cpp`](00-searching-and-sorting/binary_search.cpp) | [theory](00-searching-and-sorting/binary_search_THEORY.md) | [explanation](00-searching-and-sorting/binary_search_EXPLANATION.md) | [jump](#binary-search) |
-| 00c | Linear & Binary Search (Menu) | C++ | [`linear_binary_search.cpp`](00-searching-and-sorting/linear_binary_search.cpp) | [theory](00-searching-and-sorting/linear_binary_search_THEORY.md) | [explanation](00-searching-and-sorting/linear_binary_search_EXPLANATION.md) | [jump](#linear--binary-search-menu) |
-| 00d | Bubble Sort | C++ | [`bubble_sort.cpp`](00-searching-and-sorting/bubble_sort.cpp) | [theory](00-searching-and-sorting/bubble_sort_THEORY.md) | [explanation](00-searching-and-sorting/bubble_sort_EXPLANATION.md) | [jump](#bubble-sort) |
-| 00e | Selection Sort | C++ | [`selection_sort.cpp`](00-searching-and-sorting/selection_sort.cpp) | [theory](00-searching-and-sorting/selection_sort_THEORY.md) | [explanation](00-searching-and-sorting/selection_sort_EXPLANATION.md) | [jump](#selection-sort) |
-| 00f | Insertion Sort | C++ | [`insertion_sort.cpp`](00-searching-and-sorting/insertion_sort.cpp) | [theory](00-searching-and-sorting/insertion_sort_THEORY.md) | [explanation](00-searching-and-sorting/insertion_sort_EXPLANATION.md) | [jump](#insertion-sort) |
+| 00a | Linear Search | C++ | [`linear_search.cpp`](00a-linear-search/linear_search.cpp) | [theory](00a-linear-search/THEORY.md) | [explanation](00a-linear-search/EXPLANATION.md) | [jump](#00a-linear-search) |
+| 00b | Binary Search | C++ | [`binary_search.cpp`](00b-binary-search/binary_search.cpp) | [theory](00b-binary-search/THEORY.md) | [explanation](00b-binary-search/EXPLANATION.md) | [jump](#00b-binary-search) |
+| 00c | Linear & Binary Search (Menu) | C++ | [`linear_binary_search.cpp`](00c-linear-binary-search/linear_binary_search.cpp) | [theory](00c-linear-binary-search/THEORY.md) | [explanation](00c-linear-binary-search/EXPLANATION.md) | [jump](#00c-linear--binary-search-menu) |
+| 00d | Bubble Sort | C++ | [`bubble_sort.cpp`](00d-bubble-sort/bubble_sort.cpp) | [theory](00d-bubble-sort/THEORY.md) | [explanation](00d-bubble-sort/EXPLANATION.md) | [jump](#00d-bubble-sort) |
+| 00e | Selection Sort | C++ | [`selection_sort.cpp`](00e-selection-sort/selection_sort.cpp) | [theory](00e-selection-sort/THEORY.md) | [explanation](00e-selection-sort/EXPLANATION.md) | [jump](#00e-selection-sort) |
+| 00f | Insertion Sort | C++ | [`insertion_sort.cpp`](00f-insertion-sort/insertion_sort.cpp) | [theory](00f-insertion-sort/THEORY.md) | [explanation](00f-insertion-sort/EXPLANATION.md) | [jump](#00f-insertion-sort) |
 | 01 | Student Database (Bubble Sort on structs) | C++ | [`student_database.cpp`](01-student-database-search-and-sort/student_database.cpp) | [theory](01-student-database-search-and-sort/THEORY.md) | [explanation](01-student-database-search-and-sort/EXPLANATION.md) | [jump](#01-student-database) |
 | 02 | Stack ADT (Linked List) + Infix → Postfix / Prefix | C++ | [`stack_conversions.cpp`](02-stack-infix-postfix-prefix/stack_conversions.cpp) | [theory](02-stack-infix-postfix-prefix/THEORY.md) | [explanation](02-stack-infix-postfix-prefix/EXPLANATION.md) | [jump](#02-stack-adt--expression-conversion) |
 | 03 | Circular Queue on Array | C++ | [`circular_queue.cpp`](03-circular-queue-array/circular_queue.cpp) | [theory](03-circular-queue-array/THEORY.md) | [explanation](03-circular-queue-array/EXPLANATION.md) | [jump](#03-circular-queue) |
@@ -32,66 +32,74 @@ directly by experiment folder at the repository root. Every program comes with:
 
 ## Programs (Dedicated Sections)
 
-### 00. Searching & Sorting Basics
-
-#### Linear Search
+### 00a. Linear Search
 Sequential search over 5 integers.
-- **Program:** [`00-searching-and-sorting/linear_search.cpp`](00-searching-and-sorting/linear_search.cpp)
-- **Theory:** [`00-searching-and-sorting/linear_search_THEORY.md`](00-searching-and-sorting/linear_search_THEORY.md)
-- **Explanation:** [`00-searching-and-sorting/linear_search_EXPLANATION.md`](00-searching-and-sorting/linear_search_EXPLANATION.md)
+- **Program:** [`00a-linear-search/linear_search.cpp`](00a-linear-search/linear_search.cpp)
+- **Theory:** [`00a-linear-search/THEORY.md`](00a-linear-search/THEORY.md)
+- **Explanation:** [`00a-linear-search/EXPLANATION.md`](00a-linear-search/EXPLANATION.md)
 - **Run:**
   ```bash
-  g++ -Wall -O2 00-searching-and-sorting/linear_search.cpp -o /tmp/linear_search && /tmp/linear_search
+  g++ -Wall -O2 00a-linear-search/linear_search.cpp -o /tmp/linear_search && /tmp/linear_search
   ```
 
-#### Binary Search
+---
+
+### 00b. Binary Search
 Divide-and-conquer search on a sorted array.
-- **Program:** [`00-searching-and-sorting/binary_search.cpp`](00-searching-and-sorting/binary_search.cpp)
-- **Theory:** [`00-searching-and-sorting/binary_search_THEORY.md`](00-searching-and-sorting/binary_search_THEORY.md)
-- **Explanation:** [`00-searching-and-sorting/binary_search_EXPLANATION.md`](00-searching-and-sorting/binary_search_EXPLANATION.md)
+- **Program:** [`00b-binary-search/binary_search.cpp`](00b-binary-search/binary_search.cpp)
+- **Theory:** [`00b-binary-search/THEORY.md`](00b-binary-search/THEORY.md)
+- **Explanation:** [`00b-binary-search/EXPLANATION.md`](00b-binary-search/EXPLANATION.md)
 - **Run:**
   ```bash
-  g++ -Wall -O2 00-searching-and-sorting/binary_search.cpp -o /tmp/binary_search && /tmp/binary_search
+  g++ -Wall -O2 00b-binary-search/binary_search.cpp -o /tmp/binary_search && /tmp/binary_search
   ```
 
-#### Linear & Binary Search (Menu)
+---
+
+### 00c. Linear & Binary Search (Menu)
 Menu-driven choice between Linear Search and Binary Search.
-- **Program:** [`00-searching-and-sorting/linear_binary_search.cpp`](00-searching-and-sorting/linear_binary_search.cpp)
-- **Theory:** [`00-searching-and-sorting/linear_binary_search_THEORY.md`](00-searching-and-sorting/linear_binary_search_THEORY.md)
-- **Explanation:** [`00-searching-and-sorting/linear_binary_search_EXPLANATION.md`](00-searching-and-sorting/linear_binary_search_EXPLANATION.md)
+- **Program:** [`00c-linear-binary-search/linear_binary_search.cpp`](00c-linear-binary-search/linear_binary_search.cpp)
+- **Theory:** [`00c-linear-binary-search/THEORY.md`](00c-linear-binary-search/THEORY.md)
+- **Explanation:** [`00c-linear-binary-search/EXPLANATION.md`](00c-linear-binary-search/EXPLANATION.md)
 - **Run:**
   ```bash
-  g++ -Wall -O2 00-searching-and-sorting/linear_binary_search.cpp -o /tmp/linear_binary_search && /tmp/linear_binary_search
+  g++ -Wall -O2 00c-linear-binary-search/linear_binary_search.cpp -o /tmp/linear_binary_search && /tmp/linear_binary_search
   ```
 
-#### Bubble Sort
+---
+
+### 00d. Bubble Sort
 Adjacent-swap ascending sort.
-- **Program:** [`00-searching-and-sorting/bubble_sort.cpp`](00-searching-and-sorting/bubble_sort.cpp)
-- **Theory:** [`00-searching-and-sorting/bubble_sort_THEORY.md`](00-searching-and-sorting/bubble_sort_THEORY.md)
-- **Explanation:** [`00-searching-and-sorting/bubble_sort_EXPLANATION.md`](00-searching-and-sorting/bubble_sort_EXPLANATION.md)
+- **Program:** [`00d-bubble-sort/bubble_sort.cpp`](00d-bubble-sort/bubble_sort.cpp)
+- **Theory:** [`00d-bubble-sort/THEORY.md`](00d-bubble-sort/THEORY.md)
+- **Explanation:** [`00d-bubble-sort/EXPLANATION.md`](00d-bubble-sort/EXPLANATION.md)
 - **Run:**
   ```bash
-  g++ -Wall -O2 00-searching-and-sorting/bubble_sort.cpp -o /tmp/bubble_sort && /tmp/bubble_sort
+  g++ -Wall -O2 00d-bubble-sort/bubble_sort.cpp -o /tmp/bubble_sort && /tmp/bubble_sort
   ```
 
-#### Selection Sort
+---
+
+### 00e. Selection Sort
 Repeatedly selects the minimum from the unsorted suffix and swaps into place.
-- **Program:** [`00-searching-and-sorting/selection_sort.cpp`](00-searching-and-sorting/selection_sort.cpp)
-- **Theory:** [`00-searching-and-sorting/selection_sort_THEORY.md`](00-searching-and-sorting/selection_sort_THEORY.md)
-- **Explanation:** [`00-searching-and-sorting/selection_sort_EXPLANATION.md`](00-searching-and-sorting/selection_sort_EXPLANATION.md)
+- **Program:** [`00e-selection-sort/selection_sort.cpp`](00e-selection-sort/selection_sort.cpp)
+- **Theory:** [`00e-selection-sort/THEORY.md`](00e-selection-sort/THEORY.md)
+- **Explanation:** [`00e-selection-sort/EXPLANATION.md`](00e-selection-sort/EXPLANATION.md)
 - **Run:**
   ```bash
-  g++ -Wall -O2 00-searching-and-sorting/selection_sort.cpp -o /tmp/selection_sort && /tmp/selection_sort
+  g++ -Wall -O2 00e-selection-sort/selection_sort.cpp -o /tmp/selection_sort && /tmp/selection_sort
   ```
 
-#### Insertion Sort
+---
+
+### 00f. Insertion Sort
 Inserts each element into its sorted prefix position by shifting larger elements right.
-- **Program:** [`00-searching-and-sorting/insertion_sort.cpp`](00-searching-and-sorting/insertion_sort.cpp)
-- **Theory:** [`00-searching-and-sorting/insertion_sort_THEORY.md`](00-searching-and-sorting/insertion_sort_THEORY.md)
-- **Explanation:** [`00-searching-and-sorting/insertion_sort_EXPLANATION.md`](00-searching-and-sorting/insertion_sort_EXPLANATION.md)
+- **Program:** [`00f-insertion-sort/insertion_sort.cpp`](00f-insertion-sort/insertion_sort.cpp)
+- **Theory:** [`00f-insertion-sort/THEORY.md`](00f-insertion-sort/THEORY.md)
+- **Explanation:** [`00f-insertion-sort/EXPLANATION.md`](00f-insertion-sort/EXPLANATION.md)
 - **Run:**
   ```bash
-  g++ -Wall -O2 00-searching-and-sorting/insertion_sort.cpp -o /tmp/insertion_sort && /tmp/insertion_sort
+  g++ -Wall -O2 00f-insertion-sort/insertion_sort.cpp -o /tmp/insertion_sort && /tmp/insertion_sort
   ```
 
 ---
@@ -249,25 +257,30 @@ programs (`python3 -m py_compile`) → `passed: 16   failed: 0`.
 ```text
 .
 ├── check_all.sh
-├── 00-searching-and-sorting/
-│   ├── binary_search.cpp
-│   ├── binary_search_EXPLANATION.md
-│   ├── binary_search_THEORY.md
-│   ├── bubble_sort.cpp
-│   ├── bubble_sort_EXPLANATION.md
-│   ├── bubble_sort_THEORY.md
-│   ├── insertion_sort.cpp
-│   ├── insertion_sort_EXPLANATION.md
-│   ├── insertion_sort_THEORY.md
-│   ├── linear_binary_search.cpp
-│   ├── linear_binary_search_EXPLANATION.md
-│   ├── linear_binary_search_THEORY.md
+├── 00a-linear-search/
 │   ├── linear_search.cpp
-│   ├── linear_search_EXPLANATION.md
-│   ├── linear_search_THEORY.md
+│   ├── EXPLANATION.md
+│   └── THEORY.md
+├── 00b-binary-search/
+│   ├── binary_search.cpp
+│   ├── EXPLANATION.md
+│   └── THEORY.md
+├── 00c-linear-binary-search/
+│   ├── linear_binary_search.cpp
+│   ├── EXPLANATION.md
+│   └── THEORY.md
+├── 00d-bubble-sort/
+│   ├── bubble_sort.cpp
+│   ├── EXPLANATION.md
+│   └── THEORY.md
+├── 00e-selection-sort/
 │   ├── selection_sort.cpp
-│   ├── selection_sort_EXPLANATION.md
-│   └── selection_sort_THEORY.md
+│   ├── EXPLANATION.md
+│   └── THEORY.md
+├── 00f-insertion-sort/
+│   ├── insertion_sort.cpp
+│   ├── EXPLANATION.md
+│   └── THEORY.md
 ├── 01-student-database-search-and-sort/
 │   ├── student_database.cpp
 │   ├── EXPLANATION.md

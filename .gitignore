@@ -5,12 +5,12 @@ __pycache__/
 a.out
 
 # compiled C++ programs
-00-searching-and-sorting/linear_search
-00-searching-and-sorting/binary_search
-00-searching-and-sorting/linear_binary_search
-00-searching-and-sorting/bubble_sort
-00-searching-and-sorting/selection_sort
-00-searching-and-sorting/insertion_sort
+00a-linear-search/linear_search
+00b-binary-search/binary_search
+00c-linear-binary-search/linear_binary_search
+00d-bubble-sort/bubble_sort
+00e-selection-sort/selection_sort
+00f-insertion-sort/insertion_sort
 01-student-database-search-and-sort/student_database
 02-stack-infix-postfix-prefix/stack_conversions
 03-circular-queue-array/circular_queue
