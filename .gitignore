@@ -3,7 +3,14 @@ __pycache__/
 *.o
 *.exe
 a.out
+
 # compiled C++ programs
-part_a_cpp/**/student_database
-part_a_cpp/**/stack_conversions
-part_a_cpp/**/circular_queue
+00-searching-and-sorting/linear_search
+00-searching-and-sorting/binary_search
+00-searching-and-sorting/linear_binary_search
+00-searching-and-sorting/bubble_sort
+00-searching-and-sorting/selection_sort
+00-searching-and-sorting/insertion_sort
+01-student-database-search-and-sort/student_database
+02-stack-infix-postfix-prefix/stack_conversions
+03-circular-queue-array/circular_queue

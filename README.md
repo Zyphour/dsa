@@ -1,78 +1,311 @@
-# DSA Practicals
+# DSA Experiments
 
-Ten practicals. Each one is in its own folder with the program, a **theory note**
-(what and why) and a **code explanation** (how the code works, dry run, viva).
+C++ and Python implementations of core Data Structures & Algorithms, organized
+directly by experiment folder at the repository root. Every program comes with:
 
-| # | Practical | Language | Program | Notes |
-|---|---|---|---|---|
-| 1 | Student database — dynamic memory, Linear & Binary Search, Bubble & Selection Sort | C++ | [`student_database.cpp`](part_a_cpp/01-student-database-search-and-sort/student_database.cpp) | [theory](part_a_cpp/01-student-database-search-and-sort/THEORY.md) · [explanation](part_a_cpp/01-student-database-search-and-sort/EXPLANATION.md) |
-| 2 | Stack ADT on a linked list + infix → postfix / prefix | C++ | [`stack_conversions.cpp`](part_a_cpp/02-stack-infix-postfix-prefix/stack_conversions.cpp) | [theory](part_a_cpp/02-stack-infix-postfix-prefix/THEORY.md) · [explanation](part_a_cpp/02-stack-infix-postfix-prefix/EXPLANATION.md) |
-| 3 | Circular Queue on an array — enqueue, dequeue, display, full check | C++ | [`circular_queue.cpp`](part_a_cpp/03-circular-queue-array/circular_queue.cpp) | [theory](part_a_cpp/03-circular-queue-array/THEORY.md) · [explanation](part_a_cpp/03-circular-queue-array/EXPLANATION.md) |
-| 4 | Binary Search Tree — insert, delete, search, traversals, depth, mirror, copy, parents, leaves, level-wise | Python | [`binary_search_tree.py`](part_b_python/04-binary-search-tree/binary_search_tree.py) | [theory](part_b_python/04-binary-search-tree/THEORY.md) · [explanation](part_b_python/04-binary-search-tree/EXPLANATION.md) |
-| 5 | Campus graph + MST with Kruskal and Prim | Python | [`campus_mst.py`](part_b_python/05-campus-graph-mst-kruskal-prim/campus_mst.py) | [theory](part_b_python/05-campus-graph-mst-kruskal-prim/THEORY.md) · [explanation](part_b_python/05-campus-graph-mst-kruskal-prim/EXPLANATION.md) |
-| 6 | Heap Sort | Python | [`heap_sort.py`](part_b_python/06-heap-sort/heap_sort.py) | [theory](part_b_python/06-heap-sort/THEORY.md) · [explanation](part_b_python/06-heap-sort/EXPLANATION.md) |
-| 7 | Merge Sort — online orders by delivery time | Python | [`merge_sort_orders.py`](part_b_python/07-merge-sort-orders/merge_sort_orders.py) | [theory](part_b_python/07-merge-sort-orders/THEORY.md) · [explanation](part_b_python/07-merge-sort-orders/EXPLANATION.md) |
-| 8 | Fractional Knapsack (greedy) — maximise shipping profit | Python | [`fractional_knapsack.py`](part_b_python/08-fractional-knapsack/fractional_knapsack.py) | [theory](part_b_python/08-fractional-knapsack/THEORY.md) · [explanation](part_b_python/08-fractional-knapsack/EXPLANATION.md) |
-| 9 | Naïve string matching — all occurrences of a pattern | Python | [`naive_string_matching.py`](part_b_python/09-naive-string-matching/naive_string_matching.py) | [theory](part_b_python/09-naive-string-matching/THEORY.md) · [explanation](part_b_python/09-naive-string-matching/EXPLANATION.md) |
-| 10 | Maze navigation — BFS, A\*, dynamic re-planning, visualisation | Python | [`maze_ai_search.py`](part_b_python/10-maze-ai-search/maze_ai_search.py) | [theory](part_b_python/10-maze-ai-search/THEORY.md) · [explanation](part_b_python/10-maze-ai-search/EXPLANATION.md) |
+- **Program** — the C++ or Python source file
+- **Theory** — written lab info to submit with the program (aim, topic overview, how it works, algorithm, complexity)
+- **Explanation** — student-facing guide explaining the code, dry runs, common mistakes, and viva Q&A
 
-## Run
+## All Programs
 
-**C++ (1–3)** — compile and run inside the practical's folder:
+| # | Program / Experiment | Language | Program | Theory | Explanation | Section |
+|---|---|---|---|---|---|---|
+| 00a | Linear Search | C++ | [`linear_search.cpp`](00-searching-and-sorting/linear_search.cpp) | [theory](00-searching-and-sorting/linear_search_THEORY.md) | [explanation](00-searching-and-sorting/linear_search_EXPLANATION.md) | [jump](#linear-search) |
+| 00b | Binary Search | C++ | [`binary_search.cpp`](00-searching-and-sorting/binary_search.cpp) | [theory](00-searching-and-sorting/binary_search_THEORY.md) | [explanation](00-searching-and-sorting/binary_search_EXPLANATION.md) | [jump](#binary-search) |
+| 00c | Linear & Binary Search (Menu) | C++ | [`linear_binary_search.cpp`](00-searching-and-sorting/linear_binary_search.cpp) | [theory](00-searching-and-sorting/linear_binary_search_THEORY.md) | [explanation](00-searching-and-sorting/linear_binary_search_EXPLANATION.md) | [jump](#linear--binary-search-menu) |
+| 00d | Bubble Sort | C++ | [`bubble_sort.cpp`](00-searching-and-sorting/bubble_sort.cpp) | [theory](00-searching-and-sorting/bubble_sort_THEORY.md) | [explanation](00-searching-and-sorting/bubble_sort_EXPLANATION.md) | [jump](#bubble-sort) |
+| 00e | Selection Sort | C++ | [`selection_sort.cpp`](00-searching-and-sorting/selection_sort.cpp) | [theory](00-searching-and-sorting/selection_sort_THEORY.md) | [explanation](00-searching-and-sorting/selection_sort_EXPLANATION.md) | [jump](#selection-sort) |
+| 00f | Insertion Sort | C++ | [`insertion_sort.cpp`](00-searching-and-sorting/insertion_sort.cpp) | [theory](00-searching-and-sorting/insertion_sort_THEORY.md) | [explanation](00-searching-and-sorting/insertion_sort_EXPLANATION.md) | [jump](#insertion-sort) |
+| 01 | Student Database (Bubble Sort on structs) | C++ | [`student_database.cpp`](01-student-database-search-and-sort/student_database.cpp) | [theory](01-student-database-search-and-sort/THEORY.md) | [explanation](01-student-database-search-and-sort/EXPLANATION.md) | [jump](#01-student-database) |
+| 02 | Stack ADT (Linked List) + Infix → Postfix / Prefix | C++ | [`stack_conversions.cpp`](02-stack-infix-postfix-prefix/stack_conversions.cpp) | [theory](02-stack-infix-postfix-prefix/THEORY.md) | [explanation](02-stack-infix-postfix-prefix/EXPLANATION.md) | [jump](#02-stack-adt--expression-conversion) |
+| 03 | Circular Queue on Array | C++ | [`circular_queue.cpp`](03-circular-queue-array/circular_queue.cpp) | [theory](03-circular-queue-array/THEORY.md) | [explanation](03-circular-queue-array/EXPLANATION.md) | [jump](#03-circular-queue) |
+| 04 | Binary Search Tree (BST) | Python | [`binary_search_tree.py`](04-binary-search-tree/binary_search_tree.py) | [theory](04-binary-search-tree/THEORY.md) | [explanation](04-binary-search-tree/EXPLANATION.md) | [jump](#04-binary-search-tree) |
+| 05 | Campus Graph + Kruskal & Prim MST | Python | [`campus_mst.py`](05-campus-graph-mst-kruskal-prim/campus_mst.py) | [theory](05-campus-graph-mst-kruskal-prim/THEORY.md) | [explanation](05-campus-graph-mst-kruskal-prim/EXPLANATION.md) | [jump](#05-campus-graph--mst) |
+| 06 | Heap Sort | Python | [`heap_sort.py`](06-heap-sort/heap_sort.py) | [theory](06-heap-sort/THEORY.md) | [explanation](06-heap-sort/EXPLANATION.md) | [jump](#06-heap-sort) |
+| 07 | Merge Sort | Python | [`merge_sort_orders.py`](07-merge-sort-orders/merge_sort_orders.py) | [theory](07-merge-sort-orders/THEORY.md) | [explanation](07-merge-sort-orders/EXPLANATION.md) | [jump](#07-merge-sort) |
+| 08 | Fractional Knapsack (Greedy) | Python | [`fractional_knapsack.py`](08-fractional-knapsack/fractional_knapsack.py) | [theory](08-fractional-knapsack/THEORY.md) | [explanation](08-fractional-knapsack/EXPLANATION.md) | [jump](#08-fractional-knapsack) |
+| 09 | Naïve String Matching | Python | [`naive_string_matching.py`](09-naive-string-matching/naive_string_matching.py) | [theory](09-naive-string-matching/THEORY.md) | [explanation](09-naive-string-matching/EXPLANATION.md) | [jump](#09-naïve-string-matching) |
+| 10 | Maze Navigation (BFS, A\*, Dynamic Re-planning) | Python | [`maze_ai_search.py`](10-maze-ai-search/maze_ai_search.py) | [theory](10-maze-ai-search/THEORY.md) | [explanation](10-maze-ai-search/EXPLANATION.md) | [jump](#10-maze-ai-search) |
 
-```bash
-cd part_a_cpp/01-student-database-search-and-sort
-g++ student_database.cpp -o student_database && ./student_database
-```
+---
 
-**Python (4–10)** — no installation, standard library only:
+## Programs (Dedicated Sections)
 
-```bash
-cd part_b_python/06-heap-sort
-python3 heap_sort.py
-```
+### 00. Searching & Sorting Basics
 
-4 has an interactive menu; 5–10 run their demo directly.
+#### Linear Search
+Sequential search over 5 integers.
+- **Program:** [`00-searching-and-sorting/linear_search.cpp`](00-searching-and-sorting/linear_search.cpp)
+- **Theory:** [`00-searching-and-sorting/linear_search_THEORY.md`](00-searching-and-sorting/linear_search_THEORY.md)
+- **Explanation:** [`00-searching-and-sorting/linear_search_EXPLANATION.md`](00-searching-and-sorting/linear_search_EXPLANATION.md)
+- **Run:**
+  ```bash
+  g++ -Wall -O2 00-searching-and-sorting/linear_search.cpp -o /tmp/linear_search && /tmp/linear_search
+  ```
 
-## Verify everything
+#### Binary Search
+Divide-and-conquer search on a sorted array.
+- **Program:** [`00-searching-and-sorting/binary_search.cpp`](00-searching-and-sorting/binary_search.cpp)
+- **Theory:** [`00-searching-and-sorting/binary_search_THEORY.md`](00-searching-and-sorting/binary_search_THEORY.md)
+- **Explanation:** [`00-searching-and-sorting/binary_search_EXPLANATION.md`](00-searching-and-sorting/binary_search_EXPLANATION.md)
+- **Run:**
+  ```bash
+  g++ -Wall -O2 00-searching-and-sorting/binary_search.cpp -o /tmp/binary_search && /tmp/binary_search
+  ```
+
+#### Linear & Binary Search (Menu)
+Menu-driven choice between Linear Search and Binary Search.
+- **Program:** [`00-searching-and-sorting/linear_binary_search.cpp`](00-searching-and-sorting/linear_binary_search.cpp)
+- **Theory:** [`00-searching-and-sorting/linear_binary_search_THEORY.md`](00-searching-and-sorting/linear_binary_search_THEORY.md)
+- **Explanation:** [`00-searching-and-sorting/linear_binary_search_EXPLANATION.md`](00-searching-and-sorting/linear_binary_search_EXPLANATION.md)
+- **Run:**
+  ```bash
+  g++ -Wall -O2 00-searching-and-sorting/linear_binary_search.cpp -o /tmp/linear_binary_search && /tmp/linear_binary_search
+  ```
+
+#### Bubble Sort
+Adjacent-swap ascending sort.
+- **Program:** [`00-searching-and-sorting/bubble_sort.cpp`](00-searching-and-sorting/bubble_sort.cpp)
+- **Theory:** [`00-searching-and-sorting/bubble_sort_THEORY.md`](00-searching-and-sorting/bubble_sort_THEORY.md)
+- **Explanation:** [`00-searching-and-sorting/bubble_sort_EXPLANATION.md`](00-searching-and-sorting/bubble_sort_EXPLANATION.md)
+- **Run:**
+  ```bash
+  g++ -Wall -O2 00-searching-and-sorting/bubble_sort.cpp -o /tmp/bubble_sort && /tmp/bubble_sort
+  ```
+
+#### Selection Sort
+Repeatedly selects the minimum from the unsorted suffix and swaps into place.
+- **Program:** [`00-searching-and-sorting/selection_sort.cpp`](00-searching-and-sorting/selection_sort.cpp)
+- **Theory:** [`00-searching-and-sorting/selection_sort_THEORY.md`](00-searching-and-sorting/selection_sort_THEORY.md)
+- **Explanation:** [`00-searching-and-sorting/selection_sort_EXPLANATION.md`](00-searching-and-sorting/selection_sort_EXPLANATION.md)
+- **Run:**
+  ```bash
+  g++ -Wall -O2 00-searching-and-sorting/selection_sort.cpp -o /tmp/selection_sort && /tmp/selection_sort
+  ```
+
+#### Insertion Sort
+Inserts each element into its sorted prefix position by shifting larger elements right.
+- **Program:** [`00-searching-and-sorting/insertion_sort.cpp`](00-searching-and-sorting/insertion_sort.cpp)
+- **Theory:** [`00-searching-and-sorting/insertion_sort_THEORY.md`](00-searching-and-sorting/insertion_sort_THEORY.md)
+- **Explanation:** [`00-searching-and-sorting/insertion_sort_EXPLANATION.md`](00-searching-and-sorting/insertion_sort_EXPLANATION.md)
+- **Run:**
+  ```bash
+  g++ -Wall -O2 00-searching-and-sorting/insertion_sort.cpp -o /tmp/insertion_sort && /tmp/insertion_sort
+  ```
+
+---
+
+### 01. Student Database
+Reads 15 student records (`roll`, `name`, `cgpa`) and sorts them by roll number using Bubble Sort.
+- **Program:** [`01-student-database-search-and-sort/student_database.cpp`](01-student-database-search-and-sort/student_database.cpp)
+- **Theory:** [`01-student-database-search-and-sort/THEORY.md`](01-student-database-search-and-sort/THEORY.md)
+- **Explanation:** [`01-student-database-search-and-sort/EXPLANATION.md`](01-student-database-search-and-sort/EXPLANATION.md)
+- **Run:**
+  ```bash
+  g++ -Wall -O2 01-student-database-search-and-sort/student_database.cpp -o /tmp/student_database && /tmp/student_database
+  ```
+
+---
+
+### 02. Stack ADT & Expression Conversion
+Singly linked-list Stack with push/pop/display and infix → postfix / prefix conversion.
+- **Program:** [`02-stack-infix-postfix-prefix/stack_conversions.cpp`](02-stack-infix-postfix-prefix/stack_conversions.cpp)
+- **Theory:** [`02-stack-infix-postfix-prefix/THEORY.md`](02-stack-infix-postfix-prefix/THEORY.md)
+- **Explanation:** [`02-stack-infix-postfix-prefix/EXPLANATION.md`](02-stack-infix-postfix-prefix/EXPLANATION.md)
+- **Run:**
+  ```bash
+  g++ -Wall -O2 02-stack-infix-postfix-prefix/stack_conversions.cpp -o /tmp/stack_conversions && /tmp/stack_conversions
+  ```
+
+---
+
+### 03. Circular Queue
+Array-based circular queue of size 5 supporting enqueue, dequeue, and display.
+- **Program:** [`03-circular-queue-array/circular_queue.cpp`](03-circular-queue-array/circular_queue.cpp)
+- **Theory:** [`03-circular-queue-array/THEORY.md`](03-circular-queue-array/THEORY.md)
+- **Explanation:** [`03-circular-queue-array/EXPLANATION.md`](03-circular-queue-array/EXPLANATION.md)
+- **Run:**
+  ```bash
+  g++ -Wall -O2 03-circular-queue-array/circular_queue.cpp -o /tmp/circular_queue && /tmp/circular_queue
+  ```
+
+---
+
+### 04. Binary Search Tree
+Binary Search Tree supporting insert, search, delete, and inorder traversal.
+- **Program:** [`04-binary-search-tree/binary_search_tree.py`](04-binary-search-tree/binary_search_tree.py)
+- **Theory:** [`04-binary-search-tree/THEORY.md`](04-binary-search-tree/THEORY.md)
+- **Explanation:** [`04-binary-search-tree/EXPLANATION.md`](04-binary-search-tree/EXPLANATION.md)
+- **Run:**
+  ```bash
+  python3 04-binary-search-tree/binary_search_tree.py
+  ```
+
+---
+
+### 05. Campus Graph & MST
+Represents a 5-building campus graph using both adjacency list and adjacency matrix, then finds the Minimum Spanning Tree using Kruskal's and Prim's algorithms.
+- **Program:** [`05-campus-graph-mst-kruskal-prim/campus_mst.py`](05-campus-graph-mst-kruskal-prim/campus_mst.py)
+- **Theory:** [`05-campus-graph-mst-kruskal-prim/THEORY.md`](05-campus-graph-mst-kruskal-prim/THEORY.md)
+- **Explanation:** [`05-campus-graph-mst-kruskal-prim/EXPLANATION.md`](05-campus-graph-mst-kruskal-prim/EXPLANATION.md)
+- **Run:**
+  ```bash
+  python3 05-campus-graph-mst-kruskal-prim/campus_mst.py
+  ```
+
+---
+
+### 06. Heap Sort
+Sorts a list in place by building a max-heap and repeatedly extracting the maximum.
+- **Program:** [`06-heap-sort/heap_sort.py`](06-heap-sort/heap_sort.py)
+- **Theory:** [`06-heap-sort/THEORY.md`](06-heap-sort/THEORY.md)
+- **Explanation:** [`06-heap-sort/EXPLANATION.md`](06-heap-sort/EXPLANATION.md)
+- **Run:**
+  ```bash
+  python3 06-heap-sort/heap_sort.py
+  ```
+
+---
+
+### 07. Merge Sort
+Recursive divide-and-conquer Merge Sort demo.
+- **Program:** [`07-merge-sort-orders/merge_sort_orders.py`](07-merge-sort-orders/merge_sort_orders.py)
+- **Theory:** [`07-merge-sort-orders/THEORY.md`](07-merge-sort-orders/THEORY.md)
+- **Explanation:** [`07-merge-sort-orders/EXPLANATION.md`](07-merge-sort-orders/EXPLANATION.md)
+- **Run:**
+  ```bash
+  python3 07-merge-sort-orders/merge_sort_orders.py
+  ```
+
+---
+
+### 08. Fractional Knapsack
+Greedy Fractional Knapsack choosing items by highest profit-to-weight ratio.
+- **Program:** [`08-fractional-knapsack/fractional_knapsack.py`](08-fractional-knapsack/fractional_knapsack.py)
+- **Theory:** [`08-fractional-knapsack/THEORY.md`](08-fractional-knapsack/THEORY.md)
+- **Explanation:** [`08-fractional-knapsack/EXPLANATION.md`](08-fractional-knapsack/EXPLANATION.md)
+- **Run:**
+  ```bash
+  python3 08-fractional-knapsack/fractional_knapsack.py
+  ```
+
+---
+
+### 09. Naïve String Matching
+Finds all occurrences (including overlaps) of a pattern inside a text string.
+- **Program:** [`09-naive-string-matching/naive_string_matching.py`](09-naive-string-matching/naive_string_matching.py)
+- **Theory:** [`09-naive-string-matching/THEORY.md`](09-naive-string-matching/THEORY.md)
+- **Explanation:** [`09-naive-string-matching/EXPLANATION.md`](09-naive-string-matching/EXPLANATION.md)
+- **Run:**
+  ```bash
+  python3 09-naive-string-matching/naive_string_matching.py
+  ```
+
+---
+
+### 10. Maze AI Search
+Solves a 7 × 11 grid maze using BFS, A\* (Manhattan heuristic), and dynamic re-planning when a wall blocks the path mid-walk.
+- **Program:** [`10-maze-ai-search/maze_ai_search.py`](10-maze-ai-search/maze_ai_search.py)
+- **Theory:** [`10-maze-ai-search/THEORY.md`](10-maze-ai-search/THEORY.md)
+- **Explanation:** [`10-maze-ai-search/EXPLANATION.md`](10-maze-ai-search/EXPLANATION.md)
+- **Run:**
+  ```bash
+  python3 10-maze-ai-search/maze_ai_search.py
+  ```
+
+---
+
+## Verify Everything
 
 ```bash
 bash check_all.sh
 ```
 
-Compiles the 3 C++ programs and syntax-checks the 7 Python ones →
-`passed: 10   failed: 0`.
+Compiles all 9 C++ programs (`g++ -Wall -O2`) and syntax-checks all 7 Python
+programs (`python3 -m py_compile`) → `passed: 16   failed: 0`.
 
-## Complexity at a glance
+## Complexity at a Glance
 
 | Algorithm | Time | Space |
 |---|---|---|
 | Linear search | O(n) | O(1) |
 | Binary search (sorted) | O(log n) | O(1) |
 | Bubble / Selection sort | O(n²) | O(1) |
+| Insertion sort | O(n) best, O(n²) worst | O(1) |
 | Stack push / pop | O(1) | O(1) per node |
 | Infix → postfix / prefix | O(n) | O(n) |
 | Circular queue enqueue / dequeue | O(1) | O(SIZE) |
 | BST insert / search / delete | O(log n) avg, O(n) worst | O(n) |
-| Kruskal / Prim (MST) | O(E log E) / O(E log V) | O(V + E) |
+| Kruskal / Prim (MST) | O(E log E) / O(V·E) | O(V + E) |
 | Heap sort | O(n log n) | O(1) |
 | Merge sort | O(n log n) | O(n) |
-| Fractional knapsack | O(n log n) | O(n) |
-| Naïve string matching | O(n·m) | O(1) |
-| BFS / A\* on a maze | O(V+E) / O(E log V) | O(V) |
+| Fractional knapsack | O(n log n) | O(1) extra |
+| Naïve string matching | O(n · m) | O(1) |
+| BFS / A\* on a maze | O(V + E) / O(E log V) | O(V) |
 
-## Layout
+## Repository Layout
 
-```
-part_a_cpp/01-student-database-search-and-sort/   student_database.cpp, THEORY.md, EXPLANATION.md
-part_a_cpp/02-stack-infix-postfix-prefix/         stack_conversions.cpp, THEORY.md, EXPLANATION.md
-part_a_cpp/03-circular-queue-array/               circular_queue.cpp, THEORY.md, EXPLANATION.md
-part_b_python/04-binary-search-tree/              binary_search_tree.py, THEORY.md, EXPLANATION.md
-part_b_python/05-campus-graph-mst-kruskal-prim/   campus_mst.py, THEORY.md, EXPLANATION.md
-part_b_python/06-heap-sort/                       heap_sort.py, THEORY.md, EXPLANATION.md
-part_b_python/07-merge-sort-orders/               merge_sort_orders.py, THEORY.md, EXPLANATION.md
-part_b_python/08-fractional-knapsack/             fractional_knapsack.py, THEORY.md, EXPLANATION.md
-part_b_python/09-naive-string-matching/           naive_string_matching.py, THEORY.md, EXPLANATION.md
-part_b_python/10-maze-ai-search/                  maze_ai_search.py, THEORY.md, EXPLANATION.md
-check_all.sh
+```text
+.
+├── check_all.sh
+├── 00-searching-and-sorting/
+│   ├── binary_search.cpp
+│   ├── binary_search_EXPLANATION.md
+│   ├── binary_search_THEORY.md
+│   ├── bubble_sort.cpp
+│   ├── bubble_sort_EXPLANATION.md
+│   ├── bubble_sort_THEORY.md
+│   ├── insertion_sort.cpp
+│   ├── insertion_sort_EXPLANATION.md
+│   ├── insertion_sort_THEORY.md
+│   ├── linear_binary_search.cpp
+│   ├── linear_binary_search_EXPLANATION.md
+│   ├── linear_binary_search_THEORY.md
+│   ├── linear_search.cpp
+│   ├── linear_search_EXPLANATION.md
+│   ├── linear_search_THEORY.md
+│   ├── selection_sort.cpp
+│   ├── selection_sort_EXPLANATION.md
+│   └── selection_sort_THEORY.md
+├── 01-student-database-search-and-sort/
+│   ├── student_database.cpp
+│   ├── EXPLANATION.md
+│   └── THEORY.md
+├── 02-stack-infix-postfix-prefix/
+│   ├── stack_conversions.cpp
+│   ├── EXPLANATION.md
+│   └── THEORY.md
+├── 03-circular-queue-array/
+│   ├── circular_queue.cpp
+│   ├── EXPLANATION.md
+│   └── THEORY.md
+├── 04-binary-search-tree/
+│   ├── binary_search_tree.py
+│   ├── EXPLANATION.md
+│   └── THEORY.md
+├── 05-campus-graph-mst-kruskal-prim/
+│   ├── campus_mst.py
+│   ├── EXPLANATION.md
+│   └── THEORY.md
+├── 06-heap-sort/
+│   ├── heap_sort.py
+│   ├── EXPLANATION.md
+│   └── THEORY.md
+├── 07-merge-sort-orders/
+│   ├── merge_sort_orders.py
+│   ├── EXPLANATION.md
+│   └── THEORY.md
+├── 08-fractional-knapsack/
+│   ├── fractional_knapsack.py
+│   ├── EXPLANATION.md
+│   └── THEORY.md
+├── 09-naive-string-matching/
+│   ├── naive_string_matching.py
+│   ├── EXPLANATION.md
+│   └── THEORY.md
+└── 10-maze-ai-search/
+    ├── maze_ai_search.py
+    ├── EXPLANATION.md
+    └── THEORY.md
 ```
