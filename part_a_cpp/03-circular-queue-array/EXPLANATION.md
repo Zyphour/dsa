@@ -1,53 +1,23 @@
 # Code explanation — `circular_queue.cpp`
 
-One class sized by a constant:
+Fixed-size circular queue using `#define SIZE 5`:
 
 ```cpp
-const int SIZE = 5;      // fixed size of the queue
-
 class CircularQueue {
-    int data[SIZE];
-    int front;           // index of the first element
-    int rear;            // index of the last element
-    int count;           // how many elements are inside
+    int arr[SIZE];
+    int front, rear, count;
 };
 ```
 
-The constructor sets `front = 0`, `rear = -1`, `count = 0`, so the first enqueue
-puts the element at index 0.
+Initialised with `front = 0`, `rear = -1`, `count = 0`.
 
 ## What each function does
 
 | Function | Job |
 |---|---|
-| `isEmpty()` / `isFull()` | `count == 0` / `count == SIZE` |
-| `enqueue(value)` | refuse if full; else move rear with `% SIZE`, store, `count++` |
-| `dequeue()` | refuse if empty; take `data[front]`, move front with `% SIZE`, `count--` |
-| `display()` | loop `count` times over `(front + i) % SIZE`, then draw the array |
-| `peek()` | print `data[front]` without removing it |
-
-Key lines:
-
-```cpp
-rear = (rear + 1) % SIZE;      // 4 -> 0 : the wrap-around
-data[rear] = value;
-count++;
-
-front = (front + 1) % SIZE;
-count--;
-```
-
-and the display walk that follows the wrap:
-
-```cpp
-for (int i = 0; i < count; i++) {
-    int index = (front + i) % SIZE;
-    cout << data[index] << " ";
-}
-```
-
-`display()` also prints a picture of the array (`[ 30 ]` for used slots,
-`[ -- ]` for free ones) so the wrap is visible on screen.
+| `enqueue(x)` | if `count == SIZE` print full; else `rear = (rear + 1) % SIZE`, `arr[rear] = x`, `count++` |
+| `dequeue()` | if `count == 0` print empty; else print `arr[front]`, `front = (front + 1) % SIZE`, `count--` |
+| `display()` | if `count == 0` print empty; else print `arr[(front + i) % SIZE]` for `i = 0..count-1` |
 
 ## Dry run (SIZE = 5)
 
@@ -62,21 +32,17 @@ for (int i = 0; i < count; i++) {
 | enqueue 50 | 2 | 4 | 3 | `[_, _, 30, 40, 50]` |
 | enqueue 60 | 2 | **0** | 4 | `[60, _, 30, 40, 50]` ← wrapped |
 
-Note the last row: `rear` wrapped to 0, so the element lands at the start of the
-array while the front is still at index 2.
-
 ## Common mistakes
 
-- Testing `rear == SIZE` instead of `count == SIZE` to detect full.
-- Forgetting `% SIZE`, so an index runs out of the array.
-- Printing `front..rear` in order, which reorders or misses wrapped elements.
-- Decrementing `count` on a failed (empty) dequeue.
+- Checking `rear == SIZE` instead of `count == SIZE` for full.
+- Forgetting `% SIZE` when advancing `front` or `rear`.
+- Looping `front..rear` directly instead of `(front + i) % SIZE` for `count` steps.
 
 ## Viva — short answers
 
 | Question | Answer |
 |---|---|
-| Why circular instead of linear? | Free slots at the start get reused; no shifting. |
-| Full condition without `count`? | `(rear + 1) % SIZE == front` (one slot stays empty). |
-| Time of enqueue/dequeue? | O(1) for both. |
-| Real use? | Printer queue, keyboard buffer, round-robin scheduling, BFS. |
+| Why circular instead of linear? | Reuses freed slots at the beginning without O(n) shifting. |
+| Full condition without `count`? | `(rear + 1) % SIZE == front` (leaves one slot empty). |
+| Time of enqueue / dequeue? | O(1) for both. |
+| Real applications? | CPU round-robin scheduling, printer spooler, keyboard buffer. |

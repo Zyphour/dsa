@@ -1,6 +1,6 @@
 # Code explanation — `binary_search_tree.py`
 
-A node holds a key and two links:
+Node structure:
 
 ```python
 class Node:
@@ -10,92 +10,73 @@ class Node:
         self.right = None
 ```
 
-The program loads a sample tree at start — `50, 30, 70, 20, 40, 60, 80, 40` —
-which contains a duplicate `40` on purpose.
+Loads `[50, 30, 70, 20, 40, 60, 80, 40]` initially (including duplicate `40`).
 
 ## What each function does
 
 | Function | Job |
 |---|---|
-| `insert(root, key)` | recursive insert; duplicate → right subtree with a printed note |
-| `find_min(node)` | left-most node = smallest key in a subtree |
-| `delete(root, key)` | the three cases; case 3 reuses `find_min` |
-| `search(root, key)` | loop down the tree, return `(found, steps)` |
-| `inorder` / `preorder` / `postorder` | collect keys in the three orders |
-| `depth(root)` | levels in the tree |
-| `mirror(root)` | returns a **new** tree with left/right swapped |
-| `copy_tree(root)` | returns a new, identical tree |
-| `show_parents(root, out)` | rows of `(parent, left child, right child)` |
-| `show_leaves(root, out)` | keys of nodes with no children |
-| `level_order(root)` | BFS with a queue, one list per level |
-| `print_tree(root, space)` | sideways drawing (rotated 90°), right side on top |
+| `insert(root, key)` | `<` goes left, `>=` goes right (duplicates stored on the right) |
+| `delete(root, key)` | handles 0/1 child with `if root.left is None` / `if root.right is None`, and 2 children via inorder successor `cur` |
+| `search(root, key)` | iterative walk returning `True` or `False` |
+| `inorder` / `preorder` / `postorder` | recursive traversals printing keys |
+| `depth(root)` | `0` if `None`, else `1 + max(depth(left), depth(right))` |
+| `mirror(root)` | creates a mirrored tree with `left` and `right` swapped |
+| `copy_tree(root)` | deep copy creating new `Node` instances |
+| `show_parents(root)` | prints `parent -> left , right` for every non-leaf node |
+| `show_leaves(root)` | prints keys where both `left` and `right` are `None` |
+| `level_order(root)` | BFS queue `q`, printing one list of keys per level |
 
 ## Key parts
 
-**Insert** — the recursion does the walking, and the assignment fixes the link:
+**Insert (including duplicates):**
 
 ```python
-if key < root.key:      root.left  = insert(root.left, key)
-elif key > root.key:    root.right = insert(root.right, key)
-else:                   root.right = insert(root.right, key)   # duplicate
+if root is None:
+    return Node(key)
+if key < root.key:
+    root.left = insert(root.left, key)
+else:
+    root.right = insert(root.right, key)
+return root
 ```
 
-**Delete, case 3:**
+**Delete (all 3 cases in 9 lines):**
 
 ```python
-successor = find_min(root.right)      # smallest key bigger than the node
-root.key = successor.key
-root.right = delete(root.right, successor.key)
+if root.left is None:
+    return root.right     # covers leaf (None) and right-only child
+if root.right is None:
+    return root.left      # left-only child
+cur = root.right          # two children: leftmost node of right subtree
+while cur.left:
+    cur = cur.left
+root.key = cur.key
+root.right = delete(root.right, cur.key)
 ```
-
-**Depth:**
-
-```python
-if root is None: return 0
-return 1 + max(depth(root.left), depth(root.right))
-```
-
-**Level order** keeps two lists — the current level and the next one — which
-avoids managing indices in a single queue.
 
 ## Dry run — sample tree
 
-```
-50
-├── 30
-│    ├── 20
-│    └── 40
-│         └── 40   (duplicate)
-└── 70
-     ├── 60
-     └── 80
-```
-
 | Query | Result |
 |---|---|
-| inorder | `20 30 40 40 50 60 70 80` (sorted) |
+| inorder | `20 30 40 40 50 60 70 80` |
 | preorder | `50 30 20 40 40 70 60 80` |
-| depth | 4 levels (height 3 edges) |
-| leaves | `20, 40, 60, 80` |
-| parents | `(50,30,70) (30,20,40) (40,-,40) (70,60,80)` |
-| search 999 | not found, walks 50 → 70 → 80 then stops |
-| delete 50 | successor 60 replaces it, then 60 is removed from the right subtree |
+| depth | `4` |
+| leaves | `20 40 60 80` |
+| parents | `50 -> 30 , 70`, `30 -> 20 , 40`, `40 -> - , 40`, `70 -> 60 , 80` |
+| delete 50 | inorder successor `60` replaces `50`, then `60` is deleted from right subtree |
 
 ## Common mistakes
 
-- Writing `insert(root.left, key)` without assigning it back — the new node is lost.
-- Removing a two-child node directly, which breaks the ordering rule.
-- `depth(None) = 1`, which over-counts the levels by one.
-- Mirroring only the root's children instead of every node.
-- Building a copy by writing `new_root = root`, which is only a second name for
-  the same tree (shallow copy).
+- Calling `insert(root.left, key)` without assigning back to `root.left`.
+- Returning `1` instead of `0` for `depth(None)`.
+- Writing `c = root` (shallow alias) instead of creating new `Node` objects in `copy_tree`.
 
 ## Viva — short answers
 
 | Question | Answer |
 |---|---|
-| Why is inorder sorted? | Smaller keys are visited first, then the node, then bigger ones. |
-| Worst case of a BST? | O(n) — a chain formed by inserting sorted data. |
-| Delete a node with two children? | Replace with the inorder successor, then delete the successor. |
-| Which traversal frees a tree? | Postorder. |
-| Mirror image? | Swap left and right at every node, recursively. |
+| Why is inorder sorted? | Left (smaller) is visited before root, then right (larger). |
+| Worst case of BST? | O(n) when keys are inserted in sorted order (skewed tree). |
+| How to delete a 2-child node? | Copy inorder successor's key into the node, then delete the successor. |
+| Which traversal deletes/frees a tree? | Postorder (children before parent). |

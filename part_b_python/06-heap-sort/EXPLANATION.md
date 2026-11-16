@@ -1,71 +1,50 @@
 # Code explanation — `heap_sort.py`
 
-Two functions and a self-check:
+28-line program with `heapify`, `heap_sort`, and a sample array `arr = [12, 11, 13, 5, 6, 7]`.
+
+## Functions
 
 | Function | Job |
 |---|---|
-| `heapify(arr, n, i, trace)` | push `arr[i]` down until the subtree rooted at `i` is a max-heap |
-| `heap_sort(arr, trace)` | build the heap, then move the maximum to the end n−1 times |
-| `check()` | sorts 60 random arrays and compares with Python's `sorted()` |
+| `heapify(arr, n, i)` | sifts `arr[i]` down using `l = 2 * i + 1`, `r = 2 * i + 2` until subtree `i` is a max-heap |
+| `heap_sort(arr)` | builds max-heap from `n // 2 - 1` down to `0`, then swaps `arr[0]` with `arr[i]` for `i = n - 1` down to `1` |
 
-## heapify — 8 lines that do the work
-
-```python
-largest = i
-left, right = 2*i + 1, 2*i + 2
-
-if left  < n and arr[left]  > arr[largest]: largest = left
-if right < n and arr[right] > arr[largest]: largest = right
-
-if largest != i:
-    arr[i], arr[largest] = arr[largest], arr[i]
-    heapify(arr, n, largest, trace)      # keep going down
-```
-
-`n` is the heap size, which shrinks during the sort — that is what keeps the
-already sorted tail out of the way.
-
-## heap_sort — two phases
+## Code breakdown
 
 ```python
-for i in range(n // 2 - 1, -1, -1):      # phase 1: build (last parent -> root)
-    heapify(arr, n, i, trace)
-
-for end in range(n - 1, 0, -1):          # phase 2: sort
-    arr[0], arr[end] = arr[end], arr[0]  # biggest goes to the end
-    heapify(arr, end, 0, trace)          # repair the smaller heap
+def heapify(arr, n, i):
+    largest = i
+    l = 2 * i + 1
+    r = 2 * i + 2
+    if l < n and arr[l] > arr[largest]: largest = l
+    if r < n and arr[r] > arr[largest]: largest = r
+    if largest != i:
+        arr[i], arr[largest] = arr[largest], arr[i]
+        heapify(arr, n, largest)
 ```
 
-## Trace printed by the program for `[4, 10, 3, 5, 1]`
-
+```python
+def heap_sort(arr):
+    n = len(arr)
+    for i in range(n // 2 - 1, -1, -1):    # build max-heap
+        heapify(arr, n, i)
+    for i in range(n - 1, 0, -1):          # extract max one by one
+        arr[0], arr[i] = arr[i], arr[0]
+        heapify(arr, i, 0)
 ```
-build:            [10, 5, 3, 4, 1]
-place 10 at end:  [1, 5, 3, 4 | 10]  -> heapify  [5, 4, 3, 1 | 10]
-place 5  at end:  [1, 4, 3 | 5, 10]  -> heapify  [4, 1, 3 | 5, 10]
-place 4  at end:  [3, 1 | 4, 5, 10]  -> heapify  [3, 1 | 4, 5, 10]
-place 3  at end:  [1 | 3, 4, 5, 10]
-sorted:           [1, 3, 4, 5, 10]
-```
 
-The `|` marks the growing sorted part at the end of the array — the heap never
-touches it again.
+## Dry run — `[12, 11, 13, 5, 6, 7]`
 
-## Common mistakes
-
-- Building a min-heap and expecting ascending order.
-- Running the build loop from 0 to `n−1` (leaves would be heapified first — harmless
-  but pointless — while real parents are skipped).
-- Recursing on `i` instead of the swapped child index (`largest`).
-- Not shrinking `n` after each swap, so the sorted part gets mixed back in.
-- Forgetting the bounds checks `left < n`, `right < n`.
-- Claiming heap sort is stable.
+- Build max-heap → `[13, 11, 12, 5, 6, 7]`
+- Swap `13` to index 5, heapify size 5 → `[12, 11, 7, 5, 6 | 13]`
+- Swap `12` to index 4, heapify size 4 → `[11, 6, 7, 5 | 12, 13]`
+- Continue until sorted → `[5, 6, 7, 11, 12, 13]`
 
 ## Viva — short answers
 
 | Question | Answer |
 |---|---|
-| Why O(n log n) even in the worst case? | heapify is O(log n) and is called n times, always. |
-| Advantage over merge sort? | O(1) extra space (in place). |
-| Advantage over quick sort? | Guaranteed O(n log n), no bad pivot. |
-| What is a priority queue? | "Highest priority out first" — implemented with a heap. |
-| Is it stable? | No. |
+| Worst-case time complexity? | O(n log n) — best, average and worst are all O(n log n). |
+| Space complexity? | O(1) auxiliary space (in-place sort). |
+| Why start build loop at `n // 2 - 1`? | Indices from `n // 2` onwards are leaf nodes and already valid 1-node heaps. |
+| Is heap sort stable? | No. |

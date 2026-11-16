@@ -48,14 +48,14 @@ If `h` never overestimates the real distance (it is **admissible** — Manhattan
 distance on a 4-direction grid always is), A\* still returns a shortest path.
 With `h = 0` it becomes plain BFS.
 
-## Comparison in our 15 × 21 maze
+## Comparison in our 7 × 11 maze
 
 | | BFS | A\* |
 |---|---|---|
 | Data structure | queue | min-heap |
 | Uses the goal position? | no | yes (`h`) |
-| Path length found | 30 moves | 30 moves |
-| Cells explored | 141 | 86 |
+| Path length found | 7 moves | 7 moves |
+| Cells explored | 21 | 8 |
 
 Both are optimal; A\* looks at fewer cells because the heuristic points it the
 right way.
@@ -69,10 +69,10 @@ Approach: walk along the current path; if a new wall appears ahead, **run the
 search again from the current cell** and follow the new path. This is
 *re-planning*, an online search problem.
 
-In the demo two walls appear, so the agent needs **72 moves instead of 30** —
-reacting costs extra distance, which is exactly why robots prefer a known map.
-A wall is only placed where a detour exists, so the agent is never trapped; if it
-ever were, BFS would return an empty path and the program says "no path left".
+In the demo a wall appears at `(3, 6)` after the first step, so the agent needs
+**19 moves instead of 7** by re-planning around the upper corridor — reacting
+costs extra distance, which is why robots prefer a known map. If no route is left,
+BFS returns an empty path and the program prints `"No path"`.
 
 ## Exam points
 

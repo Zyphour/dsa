@@ -49,11 +49,12 @@ most `n−1` swaps.
 
 ## Analysis: searching before vs after sorting
 
-The program makes a copy, bubble-sorts it by ID, then searches the same IDs with
-both algorithms and counts comparisons:
+Option 7 runs `linearSearch` on the unsorted array (`c1` comparisons), sorts by ID
+using `sortById()`, and then runs `binarySearch` for the same ID (`c2` comparisons):
 
 ```
-Total comparisons   Linear = 20   Binary = 13
+Linear Search Comparisons: 8
+Binary Search Comparisons: 3
 ```
 
 Why binary search wins:
