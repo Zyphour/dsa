@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+*.o
+*.exe
+a.out
+# compiled C++ programs
+part_a_cpp/**/student_database
+part_a_cpp/**/stack_conversions
+part_a_cpp/**/circular_queue
