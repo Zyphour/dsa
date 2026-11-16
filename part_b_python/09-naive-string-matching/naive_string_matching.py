@@ -1,17 +1,11 @@
-def naive_search(text, pat):
-    n, m = len(text), len(pat)
-    pos = []
+def naive_match(text, pattern):
+    n = len(text)
+    m = len(pattern)
+    positions = []
     for i in range(n - m + 1):
         j = 0
-        while j < m and text[i + j] == pat[j]:
-            j += 1
-        if j == m:
-            pos.append(i)
-    return pos
+        while j < m and text[i+j] == pattern[j]: j += 1
+        if j == m: positions.append(i)
+    return positions
 
-
-text = "ABABABABC"
-pat = "ABAB"
-print("Text:", text)
-print("Pattern:", pat)
-print("Found at:", naive_search(text, pat))
+print(naive_match("ABABABCABAB", "ABAB"))

@@ -1,67 +1,29 @@
 #include <iostream>
 using namespace std;
-
-#define SIZE 5
-
-class CircularQueue {
-    int arr[SIZE];
-    int front, rear, count;
-
-public:
-    CircularQueue() {
-        front = 0;
-        rear = -1;
-        count = 0;
+int q[5], f = -1, r = -1;
+void enqueue(int x) {
+    if ((r + 1) % 5 == f) cout << "Full";
+    else { if (f == -1) f = 0; r = (r + 1) % 5; q[r] = x; }
+}
+void dequeue() {
+    if (f == -1) cout << "Empty";
+    else { cout << "Deleted: " << q[f]; if (f == r) f = r = -1; else f = (f + 1) % 5; }
+}
+void display() {
+    if (f == -1) cout << "Empty";
+    else {
+        for (int i = f; ; i = (i + 1) % 5) { cout << q[i] << " "; if (i == r) break; }
     }
-
-    void enqueue(int x) {
-        if (count == SIZE) {
-            cout << "Queue Full\n";
-            return;
-        }
-        rear = (rear + 1) % SIZE;
-        arr[rear] = x;
-        count++;
-    }
-
-    void dequeue() {
-        if (count == 0) {
-            cout << "Queue Empty\n";
-            return;
-        }
-        cout << "Deleted: " << arr[front] << "\n";
-        front = (front + 1) % SIZE;
-        count--;
-    }
-
-    void display() {
-        if (count == 0) {
-            cout << "Queue Empty\n";
-            return;
-        }
-        for (int i = 0; i < count; i++)
-            cout << arr[(front + i) % SIZE] << " ";
-        cout << "\n";
-    }
-};
-
+}
 int main() {
-    CircularQueue q;
-    int ch, val;
-
+    int ch, x;
     do {
-        cout << "\n1.Enqueue  2.Dequeue  3.Display  0.Exit\nChoice: ";
-        cin >> ch;
-        if (ch == 1) {
-            cout << "Value: ";
-            cin >> val;
-            q.enqueue(val);
-        } else if (ch == 2) {
-            q.dequeue();
-        } else if (ch == 3) {
-            q.display();
+        cout << "\n1.Enqueue 2.Dequeue 3.Display 4.Exit\n"; cin >> ch;
+        switch (ch) {
+            case 1: cin >> x; enqueue(x); break;
+            case 2: dequeue(); break;
+            case 3: display(); break;
         }
-    } while (ch != 0);
-
+    } while (ch != 4);
     return 0;
 }
