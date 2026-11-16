@@ -1,65 +1,64 @@
 # Code explanation — `stack_conversions.cpp`
 
-Two halves: the stack ADT (linked nodes) and the expression converter that uses it.
+Two parts: the linked-list `Stack` ADT and the infix converter that uses it.
 
 ## Stack ADT
 
 ```cpp
-struct Node { char data; Node* next; };
+struct Node { char data; Node *next; };
 
 class Stack {
-    Node* top;              // first node, or NULL when empty
+    Node *top;
 public:
-    void push(char value);  // add on top
-    char pop();             // remove the top
-    char peek();            // read the top
+    Stack() { top = NULL; }
+    ~Stack() { while (!isEmpty()) pop(); }
     bool isEmpty();
+    void push(char x);
+    char pop();
+    char peek();
     void display();
-    ~Stack();               // frees all remaining nodes
 };
 ```
 
-`push` (three lines that matter):
+`push`:
 
 ```cpp
-Node* newNode = new Node;
-newNode->data = value;
-newNode->next = top;        // new node points at the old top
-top = newNode;              // and becomes the new top
+Node *nn = new Node;
+nn->data = x;
+nn->next = top;
+top = nn;
 ```
 
 `pop`:
 
 ```cpp
-Node* temp = top;  char value = temp->data;
-top = temp->next;  delete temp;  return value;
+Node *temp = top;
+char val = temp->data;
+top = top->next;
+delete temp;
+return val;
 ```
-
-The destructor repeats that unlink-and-delete until `top == NULL`, so nothing is
-leaked when a `Stack` goes out of scope.
 
 ## Conversion functions
 
 | Function | Job |
 |---|---|
-| `priority(op)` | `^` = 3, `* /` = 2, `+ -` = 1, everything else 0 |
-| `isOperator(c)` | true for `+ - * / ^` |
-| `bracketsOk(exp)` | pushes `(` and pops on `)` — a bracket check using the stack |
-| `infixToPostfix(exp, reversedMode)` | the shunting-yard engine |
-| `infixToPrefix(exp)` | reverse + swap brackets → postfix → reverse |
+| `prec(c)` | `^` = 3, `* /` = 2, `+ -` = 1, else 0 |
+| `convert(exp, revMode)` | shunting-yard engine (`revMode = false` normal, `true` for reversed string) |
+| `infixToPostfix(exp)` | calls `convert(exp, false)` |
+| `infixToPrefix(exp)` | `reverse`, swap `(` and `)`, call `convert(exp, true)`, `reverse` result |
 
-The only tricky condition in `infixToPostfix`:
+Key operator precedence check inside `convert`:
 
 ```cpp
-if (priority(top) > priority(c))                  mustPop = true;
-else if (priority(top) == priority(c))
-    mustPop = reversedMode ? (c == '^') : (c != '^');
+while (!s.isEmpty() && s.peek() != '(' &&
+       (prec(s.peek()) > prec(c) ||
+        (prec(s.peek()) == prec(c) && (revMode ? c == '^' : c != '^'))))
+    res += s.pop();
 ```
 
-Normal mode pops an equal-precedence operator except `^` (right associative).
-Reversed mode does the exact opposite, because the reversal flips associativity.
-
-`infixToPrefix` therefore calls `infixToPostfix(reversed, true)`.
+Normal mode pops equal-precedence operators except right-associative `^`.
+Reversed mode flips that rule because reversing the string flips associativity.
 
 ## Dry run — `A*(B+C)-D`
 
@@ -76,23 +75,21 @@ Reversed mode does the exact opposite, because the reversal flips associativity.
 | D | - | A B C + * D |
 | end | | A B C + * D - |
 
-Postfix `ABC+*D-`. Prefix: reverse with brackets swapped → `D-(C+B)*A` → postfix
-`DCB+A*-` → reverse → `-*A+BCD`.
+Postfix: `ABC+*D-`. Prefix: reverse + swap brackets → `D-(C+B)*A` → `DCB+A*-` → `-*A+BCD`.
 
 ## Common mistakes
 
-- Writing `top = newNode;` before `newNode->next = top;` — the rest of the stack is lost.
-- Forgetting `delete` in `pop`.
-- Popping on equal precedence for `^`, so `A^B^C` becomes `AB^C^` instead of `ABC^^`.
-- Converting prefix without swapping the brackets while reversing.
-- Not testing bracket balance first, so `(A+B` silently produces nonsense.
+- Setting `top = nn` before `nn->next = top` — loses the rest of the list.
+- Forgetting `delete temp` in `pop`.
+- Popping equal-precedence `^` in normal mode (`A^B^C` must be `ABC^^`).
+- Reversing for prefix without swapping `(` and `)`.
 
 ## Viva — short answers
 
 | Question | Answer |
 |---|---|
-| Why a linked-list stack? | No size limit and no shifting; push/pop stay O(1). |
+| Why a linked-list stack? | Dynamic size with O(1) push and pop at the head. |
 | Convert `A+B*C` to postfix. | `ABC*+`. |
 | Convert `(A-B)/C` to prefix. | `/-ABC`. |
-| Why is postfix easier to evaluate? | One left-to-right pass with a stack; no precedence or brackets. |
-| Complexity of the conversion? | O(n) time, O(n) extra stack space. |
+| Why is postfix easier to evaluate? | Single left-to-right pass with a stack; no brackets or precedence needed. |
+| Time & space of conversion? | O(n) time, O(n) stack space. |

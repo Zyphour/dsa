@@ -1,69 +1,55 @@
 # Code explanation — `student_database.cpp`
 
-Menu-driven program. The three globals are the whole database:
+Two globals hold the database:
 
 ```cpp
-Student* students;   // block of memory from malloc / realloc
-int count;           // records stored
-int capacity;        // slots available
+Student *arr = NULL;   // block of memory from malloc / realloc
+int n = 0;             // number of records stored
 ```
 
 ## What each function does
 
 | Function | Job |
 |---|---|
-| `makeRoom()` | when full, `realloc` a block twice as big (2 → 4 → 8 …) and report it |
-| `addStudent()` | read ID, name, CGPA into slot `count`, then `count++` |
-| `displayStudents()` | formatted table using `setw` / `setprecision` |
-| `linearSearch(id, comp)` | walk from index 0, count every comparison, return index or −1 |
-| `binarySearch(arr, n, id, comp)` | shrink `low..high` using `low`/`high`/`mid` |
-| `bubbleSort(byName)` | neighbour swaps; `true` = by name, `false` = by ID |
-| `selectionSortCGPA(asc)` | pick the best CGPA, swap it to the front |
-| `compareSearchPerformance()` | sorted copy + both searches on the same targets |
+| `addStudent()` | allocates with `malloc` for the first student and grows with `realloc` for each new student, then reads ID, name, CGPA |
+| `display()` | prints `ID`, `Name`, `CGPA` separated by tabs |
+| `linearSearch(key, comp)` | scans `0..n-1`, counts every comparison, returns index or `-1` |
+| `binarySearch(key, comp)` | shrinks `low..high` using `mid = (low + high) / 2` |
+| `sortById()` | bubble sort by `id` using `swap(arr[j], arr[j + 1])` |
+| `sortByName()` | bubble sort by `name` using `strcmp` |
+| `sortByCGPA(asc)` | selection sort by `cgpa` (`1` = ascending, `2` = descending) |
 
 ## Key lines
 
-**Growing the array**
+**Dynamic memory (`malloc` + `realloc`)**
 
 ```cpp
-Student* temp = (Student*)realloc(students, newCapacity * sizeof(Student));
-if (temp == NULL) { ... }
-students = temp;
+if (n == 0)
+    arr = (Student*)malloc(sizeof(Student));
+else
+    arr = (Student*)realloc(arr, (n + 1) * sizeof(Student));
 ```
-
-The result goes into `temp` first. If `realloc` fails it returns `NULL`, and
-writing that into `students` would lose the old block.
 
 **Binary search**
 
 ```cpp
 int mid = (low + high) / 2;
-if (arr[mid].id == id)     return mid;
-else if (arr[mid].id < id) low  = mid + 1;   // go right
-else                       high = mid - 1;   // go left
+comp++;
+if (arr[mid].id == key) return mid;
+else if (arr[mid].id < key) low = mid + 1;
+else high = mid - 1;
 ```
 
-**Sorting a whole record**
+**Comparing Linear vs Binary search (Choice 7)**
 
 ```cpp
-Student temp = students[i];
-students[i] = students[i + 1];
-students[i + 1] = temp;
+linearSearch(id, c1);
+sortById();
+binarySearch(id, c2);
 ```
 
-Swapping only the IDs would leave the names and CGPAs in the old order.
-
-**Fair comparison**
-
-```cpp
-Student* sorted = (Student*)malloc(count * sizeof(Student));  // copy
-// bubble sort the copy by ID
-linearSearch(target, linComp);          // on the original (unsorted) array
-binarySearch(sorted, count, target, binComp);
-```
-
-The copy protects the user's table (which may be sorted by name at that moment),
-and `free(sorted)` releases it afterwards.
+Runs linear search before sorting (`c1`), sorts by ID, and runs binary search for
+the same ID (`c2`), then `free(arr)` releases memory when exiting.
 
 ## Dry run — binary search for 104 in `[101, 102, 103, 104, 105]`
 
@@ -72,22 +58,21 @@ and `free(sorted)` releases it afterwards.
 | 1 | 0 | 4 | 2 | 103 | 103 < 104 → `low = 3` | 1 |
 | 2 | 3 | 4 | 3 | 104 | equal → found at index 3 | 2 |
 
-Linear search would take 4 comparisons here, and `n` in the worst case.
+Linear search takes 4 comparisons here, and `n` in the worst case.
 
 ## Common mistakes
 
-- Not checking the value returned by `realloc`.
-- Using `sizeof(Student*)` (a pointer) instead of `sizeof(Student)` (the record).
-- Running binary search after sorting by **name** — compile fine, wrong answers.
-- Swapping only one field of the record.
-- Forgetting `free(students)` before exit.
+- Using `sizeof(Student*)` (pointer size) instead of `sizeof(Student)` (struct size).
+- Running binary search without calling `sortById()` first.
+- Swapping only one field instead of the entire `Student` struct (`swap(arr[j], arr[j + 1])`).
+- Forgetting `free(arr)` before exit.
 
 ## Viva — short answers
 
 | Question | Answer |
 |---|---|
-| `malloc` vs `realloc`? | malloc gives a new block; realloc resizes an existing one and may move it. |
-| Why is binary search O(log n)? | The range halves every comparison. |
-| Which sort is best on sorted data? | Bubble sort with the `swapped` flag (and insertion sort): O(n). |
-| Is bubble sort stable? | Yes — it swaps only when the left key is strictly greater. |
-| When is linear search better? | Unsorted or tiny data, or when you search only once. |
+| `malloc` vs `realloc`? | malloc allocates a new block; realloc resizes an existing block and may move it. |
+| Why is binary search O(log n)? | Half the remaining search range is discarded every comparison. |
+| Is bubble sort stable? | Yes — it swaps only when the left key is strictly greater (`>`). |
+| Selection sort advantage? | Makes at most `n − 1` swaps even in the worst case. |
+| When is linear search better? | Unsorted or tiny data, or when searching only once. |

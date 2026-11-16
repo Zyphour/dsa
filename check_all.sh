@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
-# Quick health check: compile the C++ programs and syntax-check the Python ones.
-# Usage: bash check_all.sh
 
 set -u
 ok=0

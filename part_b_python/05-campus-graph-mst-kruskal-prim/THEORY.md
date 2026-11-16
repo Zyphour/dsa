@@ -10,8 +10,8 @@ find the minimum spanning tree with Kruskal's and Prim's algorithms.
 
 ## Concepts
 
-- **Vertex (node)** – a building / department: 9 in our graph.
-- **Edge (link)** – a road between two buildings, with a **weight** = distance in metres: 18 roads.
+- **Vertex (node)** – a building / department: 5 in our graph.
+- **Edge (link)** – a road between two buildings, with a **weight** = distance: 7 roads.
 - **Undirected** – the road can be walked both ways, so each edge is stored twice.
 - **Sparse graph** – few edges compared to the maximum possible → adjacency list is better.
 
@@ -21,7 +21,7 @@ find the minimum spanning tree with Kruskal's and Prim's algorithms.
 | Adjacency list | O(V+E) | sparse graphs, walking a neighbourhood |
 
 **Spanning tree** – connects all vertices, contains no cycle, and has exactly
-`V−1` edges (8 here). **Minimum spanning tree (MST)** – the spanning tree with the
+`V−1` edges (4 here). **Minimum spanning tree (MST)** – the spanning tree with the
 smallest total weight: the cheapest way to connect every building.
 
 ## Kruskal — greedy on edges
@@ -58,11 +58,11 @@ A min-heap gives the cheapest outgoing edge in `O(log V)`, so the total is
 | Result | MST | MST |
 
 Both are correct, and every MST of a graph has the **same total weight** — in our
-campus both give **1280 m**, which is a built-in self-check.
+campus both give **55**, which is a built-in self-check.
 
 ## Exam points
 
-- The MST has `V−1` edges; a 9th edge would always close a cycle.
-- A cheaper edge can still be rejected (here `CSE–ENTC 160 m`) because it closes a cycle.
+- The MST has `V−1` edges; an extra edge would always close a cycle.
+- A cheaper edge can still be rejected (here `Admin–Canteen 16`) because it closes a cycle.
 - Different MSTs can exist for one graph, but their total weights are equal.
 - Applications: network cable, water pipes, power lines, road planning.

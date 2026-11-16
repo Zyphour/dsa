@@ -32,7 +32,7 @@ cd part_b_python/06-heap-sort
 python3 heap_sort.py
 ```
 
-4, 5 and 10 have a menu; 6, 7, 8 and 9 run their demo directly.
+4 has an interactive menu; 5–10 run their demo directly.
 
 ## Verify everything
 
